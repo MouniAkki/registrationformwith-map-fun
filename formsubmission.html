@@ -1,0 +1,105 @@
+<html>  
+<head>  
+<meta name="viewport" content="width=device-width, initial-scale=1">  
+<style>  
+body{  
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif, Helvetica, sans-serif;    
+}  
+form{  
+    padding: 50px;  
+  background-color: rgb(179, 222, 240);  
+}  
+  
+input[type=text] {   
+  padding: 15px;  
+  margin: 5px 0 22px 0;  
+  display: inline-block;  
+  border: none;  
+  background: #f1f1f1;  
+}  
+input[type=text]:focus{  
+  background-color: orange;  
+  outline: none;  
+}  
+ div {  
+            padding: 10px 0;  
+         }  
+hr {  
+  border: 1px solid #f1f1f1;  
+  margin-bottom: 25px;  
+}  
+input[type=submit] {  
+  background-color: #4CAF50;  
+  color: white;  
+  padding: 16px 20px;  
+  margin: 8px 0;  
+  border: none;  
+  cursor: pointer;  
+  width: 35%;  
+  opacity: 0.9;  
+}  
+input[type=text]:hover {  
+  opacity: 1;  
+}  
+</style>  
+</head>  
+<body>
+    <center><h1>Registartion Form</h1></center>
+    <div style="display: flex; justify-content: center;">
+    <form action="#">
+    <label for="fname">First Name </label><br>
+    <input type="text" id="firstName" name="firstname"><br>
+    <label for="lname">Last Name </label><br>
+    <input type="text" id="lastName" name="lastname"><br>
+    <label for="ftname">Father Name </label><br>
+    <input type="text" id="fatherName" name="fathername"><br>
+    <label for="mtname">Mother Name </label><br>
+    <input type="text" id="motherName" name="mothername"><br>
+    <label for="pnum">Phone Number </label><br>
+    <input type="text" id="phoneNumber" name="phonenumber"><br>
+    <label for="adnum">Aadhar Number </label><br>
+    <input type="text" id="adharNumber" name="adharnumber"><br>
+    
+    <label for="Courses">Courses Applied </label>
+    <select id="course" name="course">
+    <option value="php">Please select</option>
+    <option value="node">NODEJS</option>
+    <option value="jscript">JAVASCRIPT</option>
+    <option value="react">REACT</option>
+    <option value="angular">ANGULAR</option>
+    </select><br><br>
+   <center>
+    <input type="submit" value="submit">
+		
+   </center>
+    </form>
+    </div>
+</body>
+    <script>
+      const studentsData= new Map();
+    const uniquePhoneNumber=new Set();
+    const form = document.querySelector("form");
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      const formData =new FormData(this);
+      const entries = formData.entries();
+      const data =Object.fromEntries(entries);
+      console.log(studentsData);
+      if (studentsData.has(data.adharNumber)) {
+        alert('user already exist with given aadhar');
+        return false;
+      } 
+      else {
+        if (studentsData.has(data.adharNumber)&&studentsData.get(data.adharNumber)[`${data.phoneNumber}`]) {
+          alert('user already exist with given phone Number');
+          return false;
+      }
+      studentsData.set(data.adharNumber,data);
+      }
+      alert('you have successfully register');
+      form.reset();
+      console.log(Array.from(studentsData.values()));
+    });
+  
+        </script>
+    </html>
